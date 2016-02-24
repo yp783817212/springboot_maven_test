@@ -1,0 +1,5 @@
+com/test/WebApplication.class
+com/test/entity/User.class
+com/test/dao/UserDao.class
+com/test/controller/UserController.class
+com/test/controller/HomeController.class

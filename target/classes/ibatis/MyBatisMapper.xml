@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" > 
+
+<mapper namespace="test">
+	<sql id="test.Base_Column_List" >
+      id, name, code, create_date
+    </sql>
+    
+    <select id="getUserCount" resultType="java.lang.Long">
+  		select count(1) from users
+  	</select>
+  
+	<select id="getUser" resultType="com.test.entity.User" parameterType="java.lang.Long" >
+	    select 
+	    <include refid="test.Base_Column_List" />
+	    from users where id = #{id}
+	</select>
+	    
+	<select id="getUserMapList" resultType="java.util.HashMap">  
+	    select
+	    <include refid="test.Base_Column_List" />
+	    from users  
+    </select>  
+    
+    <insert id="saveUser" parameterType="com.test.entity.User" useGeneratedKeys="true" keyProperty="id">  
+    	insert into users (id,name,code,create_date) values( #id# , #name# , #code# , #createDate )  
+    </insert>  
+ 
+    <cache eviction="LRU" flushInterval="86400000" size="256" readOnly="false"/>  
+    
+</mapper>  
